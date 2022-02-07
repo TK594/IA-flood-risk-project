@@ -1,4 +1,4 @@
-from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river
+from floodsystem.geo import stations_by_distance, stations_within_radius, rivers_with_station, stations_by_river, rivers_by_station_number
 from floodsystem.station import *
 from floodsystem.stationdata import build_station_list
 
@@ -48,3 +48,24 @@ def test_stations_by_river():
 
     assert list['river 1'] == ['Name A', 'Name D']
     assert list['river 2'] == ['Name B', 'Name E']
+
+def test_rivers_by_station_number():
+    station_A = MonitoringStation('ID A', 'Measurement ID A', 'Name A', (0,1), None, 'river 1', 'Town 1')
+    station_B = MonitoringStation('ID B', 'Measurement ID B', 'Name B', (5,5), None, 'river 2', 'Town 2')
+    station_C = MonitoringStation('ID C', 'Measurement ID C', 'Name C', (6,3), None, 'river 3', 'Town 3')
+    station_D = MonitoringStation('ID D', 'Measurement ID D', 'Name D', (0,1), None, 'river 4', 'Town 4')
+    station_E = MonitoringStation('ID E', 'Measurement ID E', 'Name E', (4,5), None, 'river 1', 'Town 1')
+    station_F = MonitoringStation('ID F', 'Measurement ID F', 'Name F', (6,3), None, 'river 2', 'Town 2')
+    station_G = MonitoringStation('ID G', 'Measurement ID G', 'Name G', (7,2), None, 'river 3', 'Town 3')
+    station_H = MonitoringStation('ID H', 'Measurement ID H', 'Name H', (7,4), None, 'river 4', 'Town 4')
+    station_I = MonitoringStation('ID I', 'Measurement ID I', 'Name I', (9,7), None, 'river 1', 'Town 1')
+    station_J = MonitoringStation('ID J', 'Measurement ID J', 'Name J', (3,3), None, 'river 2', 'Town 2')
+
+
+    list = rivers_by_station_number((station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H, station_I, station_J), 3)
+
+    assert list == [('river 1', 3), ('river 2', 3), ('river 3',2), ('river 4', 2)]
+
+
+     
+

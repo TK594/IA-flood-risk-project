@@ -4,6 +4,7 @@
 """Unit test for the station module"""
 
 from floodsystem.station import MonitoringStation
+from floodsystem.station import inconsistent_typical_range_stations
 
 
 def test_create_monitoring_station():
@@ -25,3 +26,20 @@ def test_create_monitoring_station():
     assert s.typical_range == trange
     assert s.river == river
     assert s.town == town
+
+def test_typical_range_consistent():
+    station_A = MonitoringStation('ID A', 'Measurement ID A', 'Name A', (0,1), None, 'river 1', 'Town 1')
+    station_B = MonitoringStation('ID B', 'Measurement ID B', 'Name B', (5,5), (1,3), 'river 2', 'Town 2')
+    station_C = MonitoringStation('ID C', 'Measurement ID C', 'Name C', (6,3), (5,4), 'river 2', 'Town 3')
+
+
+    assert station_A.typical_range_consistent() == False
+    assert station_B.typical_range_consistent() == True
+    assert station_C.typical_range_consistent() == False
+
+def test_inconsistent_typical_range_consistent():
+    station_A = MonitoringStation('ID A', 'Measurement ID A', 'Name A', (0,1), None, 'river 1', 'Town 1')
+    station_B = MonitoringStation('ID B', 'Measurement ID B', 'Name B', (5,5), (1,3), 'river 2', 'Town 2')
+    station_C = MonitoringStation('ID C', 'Measurement ID C', 'Name C', (6,3), (5,4), 'river 2', 'Town 3')
+
+    assert inconsistent_typical_range_stations((station_A, station_B, station_C)) == ['Name A', 'Name C']
