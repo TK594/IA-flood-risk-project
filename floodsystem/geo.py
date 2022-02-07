@@ -80,4 +80,32 @@ def stations_by_river(stations):
             river_dict[station.river] = [river_dict[station.river], station.name]
 
     return river_dict
-     
+
+#1E
+def rivers_by_station_number(stations, N):
+    """For a list of monitoring station objects, return a list of (river name, number of stations) """
+    #list of rivers
+    rivers= []
+    for station in stations:
+        rivers.append(station.river)
+    rivers_set = list(set(rivers))
+
+    number = []
+    #make a list of a number of stations for each river
+    for river in rivers_set:
+        number.append(len(stations_by_river(stations)[river]))
+
+    stations_number = list(zip(rivers_set, number))
+
+    rivers_with_N = sorted_by_key(stations_number, 1, reverse = True)
+    
+    sorted_rivers_with_N = rivers_with_N[:N]
+
+    #checking whether the Nth one is repeated
+    for i in range(N, len(rivers_with_N)):
+        if rivers_with_N[i][1] == rivers_with_N[N-1][1]:
+            #add the repeated tuple
+            sorted_rivers_with_N.append(rivers_with_N[i])
+
+    
+    return sorted_rivers_with_N
