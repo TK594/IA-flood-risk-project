@@ -64,7 +64,9 @@ def test_rivers_by_station_number():
 
     list = rivers_by_station_number((station_A, station_B, station_C, station_D, station_E, station_F, station_G, station_H, station_I, station_J), 3)
 
-    assert list == [('river 1', 3), ('river 2', 3), ('river 3',2), ('river 4', 2)]
+    assert list[0][1] >= list[1][1]
+    assert list[1][1] >= list[2][1]
+    assert list[2][1] >= list[3][1]
 
 
      
