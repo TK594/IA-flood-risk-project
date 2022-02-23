@@ -37,7 +37,7 @@ def plot_water_level_with_fit(station,dates,levels,p):
 
     x = matplotlib.dates.date2num(dates)
 
-    plt.plot(dates,poly(x-x[0]), label = 'best fit polynomial')
+    plt.plot(dates,poly(x-d0), label = 'best fit polynomial')
 
 
     plt.xlabel(dates)
