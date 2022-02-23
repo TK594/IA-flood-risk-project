@@ -54,9 +54,12 @@ class MonitoringStation:
     #Task2B Returning the latest water level as a fraction of typical range
     def relative_water_level(self):
         
-        if self.typical_range_consistent == True:
+        if self.typical_range_consistent() == True:
             relative_level = (self.latest_level - self.typical_range[0])/(self.typical_range[1] - self.typical_range[0])
-            return relative_level
+            if relative_level > 300:
+                return False
+            else:
+                return relative_level
         
         else:
             return None
