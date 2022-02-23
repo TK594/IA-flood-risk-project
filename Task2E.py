@@ -5,14 +5,14 @@ from floodsystem.flood import stations_level_over_threshold
 import datetime
 
 def run():
-
+    #build list of stations     
     stations = build_station_list()
-
+    #get relative levels of stations above a low tolerance
     relative_levels = stations_level_over_threshold(stations, 0)
-
+    #find 5 stations with the highest relative level
     first_5 = relative_levels[:5]
 
-
+    #get data for each of the 5 stations over the past 10 days and plot
     for station, relative_level in first_5:
 
         dates, levels = fetch_measure_levels(station.measure_id, datetime.timedelta(days = 10))

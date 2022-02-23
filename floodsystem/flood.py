@@ -3,6 +3,7 @@ from floodsystem.stationdata import update_water_levels
 
 #2B
 def stations_level_over_threshold(stations, tol):
+    """for a list of stations and a tolerance, return a list of tuples of station objects and their relative level if it's above the tolerance"""
     # Update latest level data for all stations
     update_water_levels(stations)
 

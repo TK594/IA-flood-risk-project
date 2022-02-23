@@ -12,6 +12,7 @@ def run():
     #printing stations with level over 0.8
     tol = 0.8
 
+    #creating empty array to store stations with consistent data
     consistent_stations = []
 
     for station in stations:
@@ -19,7 +20,7 @@ def run():
             consistent_stations.append(station)
 
 
-
+    #creating list of tuples of stations and their relative levels if its over the tolerance
     over_tolerance = stations_level_over_threshold(consistent_stations, tol)
 
 
