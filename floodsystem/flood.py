@@ -17,8 +17,25 @@ def stations_level_over_threshold(stations, tol):
                 stations_over_threshold.append(station)
                 latest_levels.append(station.relative_water_level())
 
-    stations_levels = list(zip(stations_over_threshold,latest_levels))
+    stations_levels = list(zip(stations_over_threshold, latest_levels))
 
 
 
     return sorted_by_key(stations_levels, 1, reverse= True)
+
+#2C
+def stations_highest_rel_level(stations, N):
+
+    # Update latest level data for all stations
+    update_water_levels(stations)
+    list_of_stations = []
+    latest_levels = []
+    for station in stations:
+        if station.latest_level != None and station.relative_water_level() != None:
+            list_of_stations.append(station)
+            latest_levels.append(station.relative_water_level())
+
+    stations_levels = list(zip(list_of_stations, latest_levels))
+
+    return sorted_by_key(stations_levels, 1, reverse= True)[:N]
+
