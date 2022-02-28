@@ -30,9 +30,9 @@ def test_stations_within_radius():
 
 
 def test_rivers_with_station():
-    list = build_station_list()
+    stations = build_station_list()
 
-    assert len(rivers_with_station(list)) == 950
+    assert type(rivers_with_station(stations)) == set
 
 
 def test_stations_by_river():
