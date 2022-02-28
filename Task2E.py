@@ -1,12 +1,13 @@
 from floodsystem.plot import plot_water_levels
 from floodsystem.datafetcher import fetch_measure_levels
-from floodsystem.stationdata import build_station_list
+from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_level_over_threshold
 import datetime
 
 def run():
     #build list of stations     
     stations = build_station_list()
+    update_water_levels(stations)
     #get relative levels of stations above a low tolerance
     relative_levels = stations_level_over_threshold(stations, 0)
     #find 5 stations with the highest relative level
